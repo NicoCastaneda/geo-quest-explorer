@@ -1,11 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import GeoGameHeader from '@/components/GeoGameHeader';
+import MapContainer from '@/components/MapContainer';
+import GamePanel from '@/components/GamePanel';
 
 const Index = () => {
+  // This would be controlled by game state in a real implementation
+  const gameState = {
+    score: 5,
+    lives: 2,
+    maxLives: 3,
+    history: [
+      { correct: true, country: 'Iran', selected: 'Iran' },
+      { correct: false, country: 'Iran', selected: 'Germany' }
+    ]
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="flex flex-col min-h-screen bg-geo-background">
+      <GeoGameHeader />
+      
+      <div className="flex flex-col md:flex-row flex-grow p-4 gap-6">
+        <div className="md:w-3/5">
+          <MapContainer recordScore={9} />
+        </div>
+        
+        <div className="md:w-2/5">
+          <GamePanel 
+            score={gameState.score}
+            lives={gameState.lives}
+            maxLives={gameState.maxLives}
+            history={gameState.history}
+          />
+        </div>
       </div>
     </div>
   );
